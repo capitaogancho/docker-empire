@@ -31,7 +31,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY ./docker-entrypoint.sh /root/
 RUN chmod +x /root/docker-entrypoint.sh
+RUN /root/docker-entrypoint.sh
 
 EXPOSE 22
-
-CMD ["/root/docker-entrypoint.sh"]
