@@ -29,6 +29,7 @@ RUN bash -c "cd /root/empire/setup && /root/empire/setup/install.sh"
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN mkdir /var/run/sshd
 RUN mkdir /root/.ssh
 RUN echo ${SSH_KEY} > /root/.ssh/authorized_keys
 
