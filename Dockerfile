@@ -18,14 +18,16 @@ python-dev \
 python-m2crypto \
 swig \
 lsb-release \
-git && \
-apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-       
+git
+   
+RUN pip install setuptools wheel    
 RUN pip install pyopenssl
 RUN mkdir /root/empire
 RUN git clone https://github.com/PowerShellEmpire/Empire.git /root/empire
 ENV STAGING_KEY=RANDOM
 RUN bash -c "cd /root/empire/setup && /root/empire/setup/install.sh"
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY ./docker-entrypoint.sh /root/
 
