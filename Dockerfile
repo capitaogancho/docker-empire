@@ -30,7 +30,7 @@ RUN bash -c "cd /root/empire/setup && /root/empire/setup/install.sh"
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY ./docker-entrypoint.sh /root/
-RUN chmod +x /opt/docker-entrypoint.sh
+RUN chmod +x /root/docker-entrypoint.sh
 
 EXPOSE 22
 
