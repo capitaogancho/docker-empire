@@ -1,0 +1,31 @@
+FROM kalilinux/kali-linux-docker
+MAINTAINER Ralph May <ralph@thedarkcloud.net>
+
+RUN echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" > /etc/apt/sources.list && \
+echo "deb-src http://http.kali.org/kali kali-rolling main contrib non-free" >> /etc/apt/sources.list
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get -y update && apt-get -y dist-upgrade && apt-get clean
+RUN apt-get update && \
+apt-get install --no-install-recommends -y \
+python \
+ca-certificates \
+openssh-server \
+python-pip \
+libssl-dev \
+libffi-dev \
+python-dev \
+python-m2crypto \
+swig \
+lsb-release \
+git && \
+apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
+       
+RUN pip install pyopenssl
+RUN mkdir /root/empire
+RUN git clone https://github.com/PowerShellEmpire/Empire.git /root/empire
+ENV STAGING_KEY=RANDOM
+RUN bash -c "cd /root/empire/setup && /root/empire/setup/install.sh"
+
+EXPOSE 22
+
