@@ -29,8 +29,9 @@ RUN bash -c "cd /root/empire/setup && /root/empire/setup/install.sh"
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY ./docker-entrypoint.sh /root/
-RUN chmod +x /root/docker-entrypoint.sh
-RUN /root/docker-entrypoint.sh
+RUN mkdir /root/.ssh
+RUN echo ${SSH_KEY} > /root/.ssh/authorized_keys
 
 EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
