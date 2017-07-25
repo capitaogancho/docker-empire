@@ -27,5 +27,8 @@ RUN git clone https://github.com/PowerShellEmpire/Empire.git /root/empire
 ENV STAGING_KEY=RANDOM
 RUN bash -c "cd /root/empire/setup && /root/empire/setup/install.sh"
 
+COPY ./docker-entrypoint.sh /root/
+
 EXPOSE 22
 
+CMD ["/root/docker-entrypoint.sh"]
