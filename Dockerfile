@@ -31,8 +31,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir /var/run/sshd
 RUN mkdir /root/.ssh
-RUN echo ${SSH_KEY} > /root/.ssh/authorized_keys
+COPY ./docker-entrypoint.sh /root/
+RUN chmod +x /opt/docker-entrypoint.sh
 
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd", "-D"]
+ENTRYPOINT ["/root/docker-entrypoint.sh"]
