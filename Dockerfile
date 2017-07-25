@@ -19,7 +19,7 @@ python-m2crypto \
 swig \
 lsb-release \
 git && \
-apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
+apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
        
 RUN pip install pyopenssl
 RUN mkdir /root/empire
